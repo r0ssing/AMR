@@ -1,0 +1,289 @@
+/*
+# ==================================================================== #
+# TITLE:                                                               #
+# AMR: An R Package for Working with Antimicrobial Resistance Data     #
+#                                                                      #
+# SOURCE CODE:                                                         #
+# https://github.com/msberends/AMR                                     #
+#                                                                      #
+# PLEASE CITE THIS SOFTWARE AS:                                        #
+# Berends MS, Luz CF, Friedrich AW, et al. (2022).                     #
+# AMR: An R Package for Working with Antimicrobial Resistance Data.    #
+# Journal of Statistical Software, 104(3), 1-31.                       #
+# https://doi.org/10.18637/jss.v104.i03                                #
+#                                                                      #
+# Developed at the University of Groningen and the University Medical  #
+# Center Groningen in The Netherlands, in collaboration with many      #
+# colleagues from around the world, see our website.                   # 
+#                                                                      #
+# This R package is free software; you can freely use and distribute   #
+# it for both personal and commercial purposes under the terms of the  #
+# GNU General Public License version 2.0 (GNU GPL-2), as published by  #
+# the Free Software Foundation.                                        #
+# We created this package for both routine data analysis and academic  #
+# research and it was publicly released in the hope that it will be    #
+# useful, but it comes WITHOUT ANY WARRANTY OR LIABILITY.              #
+#                                                                      #
+# Visit our website for the full manual and a complete tutorial about  #
+# how to conduct AMR data analysis: https://amr-for-r.org              #
+# ==================================================================== #
+*/
+
+:root, .navbar * {
+  --amr-green-light: #a7dbc3;
+  --amr-green-light-rgb: 167, 219, 195;
+  --amr-green-dark: #128f76;
+  --amr-green-dark-rgb: 18, 143, 118;
+  --amr-green-middle: #60a799;
+  --amr-green-middle-rgb: 96, 167, 153;
+  --amr-blue-light: #a8d5ef;
+  --amr-blue-light-rgb: 168, 213, 239;
+
+  --bs-success: var(--amr-green-dark) !important;
+  --bs-light: var(--amr-green-light) !important;
+  /* --bs-light was this: #128f76a6; that's bs-success with 60% alpha */
+  --bs-info: var(--amr-green-middle) !important;
+  --bs-link-color: var(--amr-green-dark) !important;
+  --bs-link-color-rgb: var(--amr-green-dark-rgb) !important;
+  
+  --bs-primary: var(--amr-green-dark) !important;
+  --bs-primary-color: var(--amr-green-dark) !important;
+  --bs-primary-rgb: var(--amr-green-dark-rgb) !important;
+  
+  --bs-secondary: white !important;
+  --bs-secondary-color: var(--amr-green-dark) !important;
+  --bs-secondary-rgb: 255, 255, 255 !important;
+  
+  --bs-navbar-brand-color: white !important;
+  --bs-navbar-brand-color-hover: white !important;
+  --bs-nav-link-color: white !important;
+  --bs-navbar-active-color: var(--amr-green-light) !important;
+  --bs-bg-opacity: 1 !important;
+  
+  --bs-dropdown-bg: var(--amr-green-dark) !important;
+  --bs-dropdown-link-color: white !important;
+  --bs-dropdown-link-color: white !important;
+  --bs-dropdown-link-hover-color: var(--amr-green-light) !important;
+  --bs-dropdown-link-hover-bg: var(--amr-green-dark) !important;
+  --bs-dropdown-link-active-color: white !important;
+}
+
+/* Python page */
+body.amr-for-python * {
+  --amr-green-light: #FFD43B; /* Python yellow */
+  --amr-green-light-rgb: 255, 212, 59;
+  --amr-green-dark: #306998; /* Python blue */
+  --amr-green-dark-rgb: 48, 105, 152;
+  --amr-green-middle: #b1bc5e; /* Adjusted middle yellow */
+  --amr-green-middle-rgb: 177, 188, 94;
+  --bs-success: var(--amr-green-dark) !important;
+  --bs-light: var(--amr-green-light) !important;
+  --bs-info: var(--amr-green-middle) !important;
+  --bs-link-color: var(--amr-green-dark) !important;
+  --bs-link-color-rgb: var(--amr-green-dark-rgb) !important;
+  --bs-primary: var(--amr-green-dark) !important;
+  --bs-primary-color: var(--amr-green-dark) !important;
+  --bs-primary-rgb: var(--amr-green-dark-rgb) !important;
+  --bs-secondary-color: var(--amr-green-dark) !important;
+  --bs-navbar-active-color: var(--amr-green-light) !important;
+  --bs-dropdown-bg: var(--amr-green-dark) !important;
+  --bs-dropdown-link-hover-color: var(--amr-green-light) !important;
+  --bs-dropdown-link-hover-bg: var(--amr-green-dark) !important;
+}
+
+.nav-text.text-muted,
+.bg-primary .navbar-nav .show>.nav-link,
+.bg-primary .navbar-nav .nav-link.active,
+.bg-primary .navbar-nav .nav-link:hover,
+.bg-primary .navbar-nav .nav-link:focus {
+  color: var(--amr-green-light) !important;
+}
+.navbar-nav .nav-item > .nav-link:hover {
+  background: none !important;
+}
+.navbar .algolia-autocomplete .aa-dropdown-menu {
+  background-color: var(--amr-green-dark) !important;
+}
+
+.version-main {
+  font-weight: bold;
+  color: var(--bs-navbar-brand-color);
+}
+.version-build {
+  font-weight: normal;
+  opacity: 0.75;
+  font-size: 0.85em;
+}
+input[type="search"] {
+  color: var(--bs-tertiary-bg) !important;
+  background-color: var(--amr-green-light) !important;
+  max-width: 160px;
+  border-color: var(--amr-green-dark) !important;
+  border-radius: 2px !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--bs-tertiary-bg) !important;
+  text-decoration: none !important;
+  color: var(--bs-body-color) !important;
+}
+.navbar-nav .nav-item > .nav-link {
+  border-radius: 0 !important;
+}
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+.template-home img.logo {
+  width: 200px;
+}
+.template-home .endorse_img {
+  width: 150px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+blockquote {
+  font-style: italic;
+  padding: 1.25rem 1.25rem;
+  border-left: 1rem solid var(--amr-green-dark);
+}
+p {
+  text-align: justify;
+}
+
+/* 
+this shows on top of every sidebar to the right
+(e.g., on top of Table of Contents)
+*/
+.amr-gpt-assistant {
+  margin-top: 10px;
+  border: 2px dashed var(--amr-green-dark);
+  text-align: center;
+  background: var(--bs-body-bg);
+}
+.amr-gpt-assistant * {
+  width: 90%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.template-reference-index .section-desc {
+  font-style: italic;
+  text-align: justify;
+  font-size: 16px;
+}
+
+@media (max-width: 575.98px) {
+  .template-home img.logo {
+    width: 140px;
+  }
+}
+/* fix some footer issues with the logos */
+@media (min-width: 576px) {
+  footer .pkgdown-footer-right {
+    width: 300px;
+  }
+}
+@media (max-width: 575.98px) {
+  footer * {
+    text-align: center;
+  }
+}
+
+.template-reference-topic h3,
+.template-reference-topic h3 code {
+  color: var(--amr-green-dark) !important;
+}
+.template-reference-topic h3 {
+  font-weight: normal;
+  margin-top: 2rem;
+}
+
+/* replace 'Developers' with 'Maintainers' */
+.developers h2 {
+  display: none;
+}
+.developers:before {
+  content: 'Maintainers';
+}
+
+/* marked words for after using the search box */
+mark, .mark {
+  background: var(--amr-green-light) !important;
+}
+
+/* smaller tables */
+.table {
+  font-size: 0.9em !important;
+}
+
+/* SYNTAX */
+/* These are simple changes for the syntax highlighting */
+pre {
+  font-size: 0.8em !important;
+}
+code, .code {
+  font-feature-settings: "ss02", "ss06";
+  /* don't wrap syntax on small devices: */
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+  white-space: pre !important;
+}
+.ot, .dv, .fl, .cn, .at,
+.op a {
+  /* numbers, TRUE/FALSE and operators */
+  color: var(--bs-dark) !important;
+}
+pre .fu, .fu {
+  /* functions */
+  color: var(--amr-green-dark) !important;
+}
+pre .fu a:hover, .fu a:hover {
+  /* functions */
+  color: var(--amr-green-light) !important;
+  text-decoration: underline;
+}
+pre .st, .st {
+  /* strings, regular text */
+  color: var(--amr-green-middle) !important;
+}
+pre .co, .co {
+  /* comments */
+  color: var(--amr-green-dark) !important;
+  font-style: italic !important;
+}
+div.sourceCode  pre .co,
+div.sourceCode .co {
+  /* comments in example sections, since functions are already green too */
+  color: var(--bs-gray-600) !important;
+}
+pre code .r-out,
+pre code .r-msg {
+  /* output of functions */
+  color: var(--bs-gray-600) !important;
+  font-style: normal !important;
+}
+code a[href],
+a[href] code,
+pre a[href],
+a code[href],
+a pre[href] {
+  /* adjusted colour for all real links; having href attribute */
+  color: var(--amr-green-dark);
+  text-decoration: none;
+}
+a[href] {
+  text-decoration: none;
+}
+code a[href]:hover, code a[href]:focus,
+a[href] code:hover, a[href] code:focus,
+pre a[href]:hover, pre a[href]:focus,
+a code[href]:hover, a code[href]:focus,
+a pre[href]:hover, a pre[href]:focus,
+a[href]:hover, a[href]:focus {
+  /* adjusted colour for all real links; having href attribute */
+  text-decoration: underline;
+}
+strong code {
+  font-weight: normal !important;
+}

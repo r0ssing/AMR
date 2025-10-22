@@ -1,0 +1,17 @@
+pandoc: 3.1.11
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  AMR_for_Python: AMR_for_Python.html
+  AMR_with_tidymodels: AMR_with_tidymodels.html
+  AMR: AMR.html
+  datasets: datasets.html
+  EUCAST: EUCAST.html
+  PCA: PCA.html
+  welcome_to_AMR: welcome_to_AMR.html
+  WHONET: WHONET.html
+  WISCA: WISCA.html
+last_built: 2025-10-22T08:33Z
+urls:
+  reference: https://amr-for-r.org/reference
+  article: https://amr-for-r.org/articles
